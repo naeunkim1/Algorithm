@@ -5,8 +5,7 @@ def solution(participant, completion):
     for part in participant:
         hashDict[hash(part)] = part
         sumHash += hash(part)
-        
-    for comp in completion:
-        sumHash -= hash(comp)
+    for com in completion:
+        sumHash -= hash(com)
     
     return hashDict[sumHash]
