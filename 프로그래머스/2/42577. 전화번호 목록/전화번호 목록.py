@@ -1,11 +1,12 @@
 def solution(phone_book):
-    phoneDict = {}
-    for phone in phone_book:
-        phoneDict[phone] = 1
-    for phone in phone_book:
+    hashDict = {}
+    
+    for nums in phone_book:
+        hashDict[nums] = 1
+    for nums in phone_book:
         arr = ''
-        for num in phone:
-            arr+=num
-            if arr in phoneDict and arr != phone:
+        for n in nums:
+            arr += n
+            if arr in hashDict and arr != nums:
                 return False
     return True
