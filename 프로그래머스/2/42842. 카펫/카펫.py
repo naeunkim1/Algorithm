@@ -1,7 +1,4 @@
 def solution(brown, yellow):
-    answer = []
-    if int((-(4-brown)-((4-brown)**2-16*yellow)**0.5)/4) > 0:
-        n = int((-(4-brown)-((4-brown)**2-16*yellow)**0.5)/4)
-    else:
-        n = int((-(4-brown)+((4-brown)**2-16*yellow)**0.5)/4)
-    return [(yellow/n)+2, n+2]
+    b = (brown-4)//2
+    y = yellow
+    return [(b+(b**2-4*y)**0.5)//2+2, (b-(b**2-4*y)**0.5)//2+2]
