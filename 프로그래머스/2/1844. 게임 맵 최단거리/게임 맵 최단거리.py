@@ -1,20 +1,23 @@
 from collections import deque
-
-def solution(maps: list):
-    Q = deque([(0, 0)])
-    dx, dy = [0, 1, 0, -1], [-1, 0, 1, 0]
-    visited = [[0 for _ in range(len(maps[0]))] for _ in range(len(maps))]
-    maps[0][0] = 0
-    visited[0][0] = 1
-    N, M = len(maps), len(maps[0])
-
-    while Q:
-        x, y = Q.popleft()
-        if x == N-1 and y == M-1:
-            return visited[x][y]
+def solution(maps):
+    n = len(maps) ; m = len(maps[0])
+    visited = [[False] * m for _ in range(n)]
+    q = deque()
+    q.append((0,0))
+    dx = [-1, 1, 0, 0]
+    dy = [0, 0, -1, 1]
+    visited[0][0] = True
+    while q:
+        y,x = q.popleft()
         for i in range(4):
-            if 0 <= x+dx[i] < N and 0 <= y+dy[i] < M and maps[x+dx[i]][y+dy[i]] == 1:
-                visited[x + dx[i]][y + dy[i]] = visited[x][y]+1
-                Q.append((x+dx[i], y+dy[i]))
-                maps[x + dx[i]][y + dy[i]] = 0
-    return -1
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if 0 <= nx < m and 0 <= ny < n and maps[ny][nx] == 1:
+                if not visited[ny][nx]:
+                    visited[ny][nx] = True
+                    q.append((ny, nx))
+                    maps[ny][nx] = maps[y][x] + 1
+    if maps[n - 1][m - 1] == 1:
+        return -1
+    else:
+        return maps[n-1][m-1]
